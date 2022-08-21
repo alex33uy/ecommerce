@@ -10,6 +10,13 @@
     background-color: #3498DB;
     padding: 50px;
     }
+    .app-title {
+      padding: 10px 0;
+    }
+    .g-signin2{
+      padding: 16px 65px;
+      width: 100px;
+    }
     .login {
     margin: auto;
     width: 300px;
@@ -22,7 +29,12 @@
     
     .app-title {
     text-align: center;
-    color: #777;
+    color: #555;
+    }
+
+    img {
+      width: 260px;
+      height: 104px;
     }
     
     .login-form {

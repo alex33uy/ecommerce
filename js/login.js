@@ -19,7 +19,7 @@ const validation = function(){
 
 button_reg.addEventListener('click', function(){
     if(validation()=== 'ok') {
-        location.assign("https://www.youtube.com")
+        location.assign("https://alex33uy.github.io/ecommerce/home")
     
     } else if (validation()==='error'){
         showAlertError();
