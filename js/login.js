@@ -1,6 +1,6 @@
 const button_reg = document.getElementById('btn_reg');
-const login_name = document.getElementById('login-name')
-const login_pass = document.getElementById('login-pass')
+const login_name = document.getElementById('login-name');
+const login_pass = document.getElementById('login-pass');
 
 function showAlertError() {
     document.getElementById("alert-danger").classList.add("show");
@@ -16,11 +16,12 @@ const validation = function(){
     }
 }
 
-
+// boton para logearse
 button_reg.addEventListener('click', function(){
     if(validation()=== 'ok') {
-        location.assign("https://alex33uy.github.io/ecommerce/home")
-    
+        // location.assign("https://alex33uy.github.io/ecommerce/home"); hice cambio por algo mas efectivo;
+        location.href = "home.html";
+        localStorage.setItem("usuario", login_name.value);
     } else if (validation()==='error'){
         showAlertError();
     }

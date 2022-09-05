@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link" href="home.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -37,9 +37,44 @@
     </div>
   </nav>
   <main class="pb-5 container">
+
     <div id="container-products">
-     
-    </div>
+      <div id="container-products-title"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col text-end">
+            <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+              <input type="radio" class="btn-check" name="options" id="sortDescCost">
+              <label class="btn btn-light" for="sortDescCost"><i class="fas fa-sort-amount-down mr-1"></i>$</label>
+              <input type="radio" class="btn-check" name="options" id="sortAscCost">
+              <label class="btn btn-light" for="sortAscCost"><i class="fas fa-sort-amount-up mr-1"></i>$</label>
+              <input type="radio" class="btn-check" name="options" id="sortBySoldCount" checked>
+              <label class="btn btn-light" for="sortBySoldCount"><i class="fas fa-sort-amount-down mr-1"></i>Rel.</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+          <div class="row container p-0 m-0">
+            <div class="col">
+              <p class="font-weight-normal text-end my-2">Cant.</p>
+            </div>
+            <div class="col">
+              <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
+            </div>
+            <div class="col">
+              <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
+            </div>
+            <div class="col-3 p-0">
+              <div class="btn-group" role="group">
+                <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+                <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div id="container-product-list"></div>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -61,7 +96,7 @@
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/products.js"></script>
+  <script src="js/products.js" ></script>
 </body>
 
 </html>

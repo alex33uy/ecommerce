@@ -1,41 +1,100 @@
 const prod_container = document.getElementById("container-products");
+const prod_container_title = document.getElementById("container-products-title");
+const prod_container_product_list = document.getElementById("container-product-list")
+const btn_desc = document.getElementById("sortDescCost");
+const btn_asc = document.getElementById("sortAscCost");
+const btn_sold_count = document.getElementById("sortBySoldCount")
 
 
+const DESC_BY_COST_ORDER = "09";
+const ASC_BY_COST_ORDER = "90";
+const ORDER_BY_SOLD_COUNT = "Cant.";
+let currentProductsArray = [];
+let currentSortCriteria = undefined;
+let minCount = undefined;
+let maxCount = undefined;
 
-function showProducts(productos) {
-  console.log(productos)
-   prod_container.innerHTML += 
-   `<div class="text-center p-4">
-   <h2>Productos</h2>
-    <p class="lead"> Veras aquí todos los productos de la categoria ${productos.catName}</p>
-   <div>`
-  for (let producto of productos.products) {
-    console.log(producto)
-    prod_container.innerHTML +=  
-    // <div class="card-product">  
-    // ${producto.id} ${producto.name} ${producto.description} ${producto.cost} ${producto.currency} ${producto.soldCount}  ${producto.image}
-    // </div>
-    `<div class="list-group-item list-group-item-action">
-    <div class="row">
-        <div class="col-3">
-            <img src="${producto.image}" alt="product image" class="img-thumbnail">
-        </div>
-        <div class="col">
-            <div class="d-flex w-100 justify-content-between">
-                <div class="mb-1">
-                <h4> ${producto.name} - ${producto.currency} ${producto.cost}</h4> 
-                <p>  ${producto.description}</p> 
-                </div>
-                <small class="text-muted">  ${producto.soldCount} vendidos</small> 
-            </div>
+function sortProducts(criteria, array){
+    let result = [];
+    if (criteria === ASC_BY_COST_ORDER)
+    {
+        result = array.sort(function(a, b) {
+            if ( a.cost < b.cost ){ return -1; }
+            if ( a.cost > b.cost ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === DESC_BY_COST_ORDER){
+        result = array.sort(function(a, b) {
+            if ( a.cost > b.cost ){ return -1; }
+            if ( a.cost < b.cost ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_BY_SOLD_COUNT){
+        result = array.sort(function(a, b) {
+            let aCount = parseInt(a.soldCount);
+            let bCount = parseInt(b.soldCount);
 
-        </div>
-    </div>
-</div>`;
-  }
-  return prod_container;
+            if ( aCount > bCount ){ return -1; }
+            if ( aCount < bCount ){ return 1; }
+            return 0;
+        });
+    }
+
+    return result;
+}
+function showProductsTitle(titulo){
+prod_container_title.innerHTML += 
+  `<div class="text-center p-4">
+  <h2>Productos</h2>
+   <p class="lead"> Veras aquí todos los productos de la categoria ${titulo.catName}</p>
+  <div>`
 }
 
+
+function showProductsList(array){
+  console.log(array)
+    let htmlContentToAppend = "";
+    for(let i = 0; i < array.length; i++){
+        let producto = array[i];
+
+        if (((minCount == undefined) || (minCount != undefined && parseInt(producto.cost) >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(producto.cost) <= maxCount))){
+
+            htmlContentToAppend += `
+                       <div class="list-group-item list-group-item-action">
+                       <div class="row">
+                           <div class="col-3">
+                               <img src="${producto.image}" alt="product image" class="img-thumbnail">
+                           </div>
+                           <div class="col">
+                               <div class="d-flex w-100 justify-content-between">
+                                   <div class="mb-1">
+                                   <h4> ${producto.name} - ${producto.currency} ${producto.cost}</h4> 
+                                   <p>  ${producto.description}</p> 
+                                   </div>
+                                   <small class="text-muted">  ${producto.soldCount} vendidos</small> 
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                       `
+        }
+
+        prod_container_product_list.innerHTML = htmlContentToAppend;
+    }
+}
+
+function sortAndShowProducts(sortCriteria, array){
+    currentSortCriteria = sortCriteria;
+
+    if(array != undefined){
+        currentProductsArray = array;
+    }
+
+    currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray);
+
+    showProductsList(currentProductsArray);
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   fetch(PRODUCTS_URL)
@@ -47,7 +106,62 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
   .then((data) => {
-     showProducts(data);
+     showProductsTitle(data);
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", function(e){
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok"){
+          array = resultObj.data.products
+            showProductsList(array)
+        }
+    });
+
+    btn_desc.addEventListener("click", function(){
+      sortAndShowProducts(ASC_BY_COST_ORDER, array);
+    });
+
+    btn_asc.addEventListener("click", function(){
+        sortAndShowProducts(DESC_BY_COST_ORDER, array);
+    });
+
+    btn_sold_count.addEventListener("click", function(){
+        sortAndShowProducts(ORDER_BY_SOLD_COUNT, array);
+    });
+
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        document.getElementById("rangeFilterCountMin").value = "";
+        document.getElementById("rangeFilterCountMax").value = "";
+
+        minCount = undefined;
+        maxCount = undefined;
+
+        showProductsList(array);
+    });
+
+    document.getElementById("rangeFilterCount").addEventListener("click", function(){
+        
+        minCount = document.getElementById("rangeFilterCountMin").value;
+        maxCount = document.getElementById("rangeFilterCountMax").value;
+
+        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
+            minCount = parseInt(minCount);
+        }
+        else{
+            minCount = undefined;
+        }
+
+        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
+            maxCount = parseInt(maxCount);
+        }
+        else{
+            maxCount = undefined;
+        }
+
+        showProductsList(array);
+    });
+});
+
 
