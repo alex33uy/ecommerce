@@ -1,0 +1,79 @@
+.checked {
+    color: orange;
+  }
+
+  textarea {
+    resize: none;
+}
+
+.btn {
+  border: 2px solid transparent;
+  background: #3498DB;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  background-color: #2980bf;
+}
+
+.d-flex {
+  display: flex;
+  align-content: space-between;
+  flex-wrap: wrap-reverse;
+}
+img {
+  width: 300px;
+  height: 180px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+#comments_title {
+  margin-top: 35px;
+}
+
+#img_div{
+  display: flex;
+  justify-content: space-between;
+}
+
+#add-st {
+  margin: 10px 0px;
+
+}
+
+/* .img-prod-container img {
+  z-index: 1;
+}
+
+img.active::after {
+  content: '';
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top:0;
+  left: 0;
+  background-color: #222 ;
+  z-index: 0;
+} */
+
+#select_score {
+  width: 65px;
+  height: 30px;
+}
+
+.opt {
+  text-align: center;
+}

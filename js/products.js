@@ -4,6 +4,7 @@ const prod_container_product_list = document.getElementById("container-product-l
 const btn_desc = document.getElementById("sortDescCost");
 const btn_asc = document.getElementById("sortAscCost");
 const btn_sold_count = document.getElementById("sortBySoldCount")
+let div_item = document.querySelector("#div_product")
 
 
 const DESC_BY_COST_ORDER = "09";
@@ -42,6 +43,13 @@ function sortProducts(criteria, array){
 
     return result;
 }
+
+function setProductId(id){
+    localStorage.setItem("productID", id);
+    window.location= "product-info.html"
+}
+
+
 function showProductsTitle(titulo){
 prod_container_title.innerHTML += 
   `<div class="text-center p-4">
@@ -49,6 +57,7 @@ prod_container_title.innerHTML +=
    <p class="lead"> Veras aquí todos los productos de la categoria ${titulo.catName}</p>
   <div>`
 }
+
 
 
 function showProductsList(array){
@@ -61,7 +70,7 @@ function showProductsList(array){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(producto.cost) <= maxCount))){
 
             htmlContentToAppend += `
-                       <div class="list-group-item list-group-item-action">
+                       <div  onclick="setProductId(${producto.id})" class="list-group-item list-group-item-action  cursor-active" id="div_product"  cursor="active">
                        <div class="row">
                            <div class="col-3">
                                <img src="${producto.image}" alt="product image" class="img-thumbnail">
@@ -163,5 +172,6 @@ document.addEventListener("DOMContentLoaded", function(e){
         showProductsList(array);
     });
 });
+
 
 

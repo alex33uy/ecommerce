@@ -10,6 +10,8 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/product-info.css">
 </head>
 
 <body>
@@ -37,10 +39,38 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container" id="container"> <!-- contenedor principal-->
+
+      <div id="product_main_container"> <!-- zona productos -->
+
       </div>
+      <div id="comments_title"> <!-- zona para mostrar titulos de comentarios-->
+        <h3> Comentarios </h3>
+      </div>
+      <div id="comments"><!-- zona para mostrar comentarios ya existentes de producto-->
+      </div>
+      <div id="comments_added"><!-- zona para añadir comentarios nuevos -->
+      </div>
+      <div id="prueba"></div>
+      <br>
+      <div id="add_comments"> <!-- zona donde estan los contenidos para hacer un comentario nuevo -->
+        <h3> Tu opinión </h3>
+        <textarea class="form-control" rows="3" ></textarea> <!-- textarea de comentario nuevo -->
+
+       <div id="add-st">
+        <label for="select_score">Añadir puntuación</label> <!-- añadir puntuacion a compentario nuevo -->
+        <select id="select_score">
+          <option class="opt" selected>1</option>
+          <option class="opt">2</option>
+          <option class="opt">3</option>
+          <option class="opt">4</option>
+          <option class="opt">5</option>
+        </select>
+       </div>
+        <br>
+        <button class="btn btn-primary btn-large btn-block" id="btn_reg_add"> Añadir Comentario </button> <!-- boton para psotear-->
+      </div>
+      
     </div>
   </main>
   <footer class="text-muted">
