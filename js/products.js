@@ -174,4 +174,17 @@ document.addEventListener("DOMContentLoaded", function(e){
 });
 
 
+// DESAFIATE BUSCADOR
+// let search_for = document.getElementById("search_for");
+
+// search_for.addEventListener("click", function searchProduct(array){
+//     for(let i = 0; i <= array.length; i++) {
+//     if (array[i].title.toLowerCase().includes(search_for.toLowerCase())){
+//         currentProductsArray += array[i];
+//     }
+// }
+// return currentProductsArray;
+// })
+
+
 

@@ -7,22 +7,48 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
-
 // Mostrando usuario logueado
+
 const navuser = document.getElementsByClassName("nav-item");
-const user = localStorage.getItem("usuario");
+let user = localStorage.getItem("usuario");
+const usuario = navuser[3]
+
 document.addEventListener("DOMContentLoaded", function(){
     if(user !== null) {
-    navuser[3].innerHTML += 
-    `<a class="nav-link " href="#"> ${user} </a>`;
+    usuario.innerHTML = 
+    `  
+    <div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    ${user} 
+  </a>
+ <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li> <a class="dropdown-item" href="cart.html"> Mi carrito</a></li>
+    <li> <a class="dropdown-item" href="my-profile.html"> Mi Perfil </a></li>
+    <li> <a class="dropdown-item   role="button"> Cerrar sesión </a></li>
+  </ul>
+</div>
+  `
+  const ips = document.getElementsByClassName("dropdown-item")[2];
+  ips.setAttribute("id", "close")
+  console.log(ips)
+  const cerrar_sesion = document.getElementById("close");
+  console.log(cerrar_sesion);
+  cerrar_sesion?.addEventListener("click", (evt) => {
+    localStorage.removeItem("usuario");
+    location.href = "index.html";
+  })
     }
-});
+ 
+})
+
+
+
+
 
 // localstorage para obtener id y mostrar productos segun categorias
 
 const catID = localStorage.getItem('catID');
-console.log(catID);
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/"+catID+".json"; // url modificada para que determine productos dependiendo categorias
+const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/"+catID+EXT_TYPE; // url modificada para que determine productos dependiendo categorias
 
 
 
@@ -59,3 +85,10 @@ let getJSONData = function(url){
         return result;
     });
 }
+const cerrar_sesion = document.getElementById("close");
+console.log(cerrar_sesion);
+cerrar_sesion?.addEventListener("click", (evt) => {
+  preventDefault();
+  localStorage.removeItem("usuario");
+  location.href = "index.html";
+})

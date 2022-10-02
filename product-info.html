@@ -47,28 +47,41 @@
       <div id="comments_title"> <!-- zona para mostrar titulos de comentarios-->
         <h3> Comentarios </h3>
       </div>
-      <div id="comments"><!-- zona para mostrar comentarios ya existentes de producto-->
-      </div>
-      <div id="comments_added"><!-- zona para añadir comentarios nuevos -->
+      
+      <div id="comment-area-container">
+
+        <div id="comments"><!-- zona para mostrar comentarios ya existentes de producto-->
+        </div>
+        <!-- <div id="img-prod-container">       
+        </div> -->
+        <div id="comments_added"> <!-- zona para añadir comentarios nuevos -->
+        </div>
+
       </div>
       <div id="prueba"></div>
       <br>
       <div id="add_comments"> <!-- zona donde estan los contenidos para hacer un comentario nuevo -->
         <h3> Tu opinión </h3>
-        <textarea class="form-control" rows="3" ></textarea> <!-- textarea de comentario nuevo -->
+        <textarea class="form-control" rows="3" id="area_comment"></textarea> <!-- textarea de comentario nuevo -->
 
        <div id="add-st">
         <label for="select_score">Añadir puntuación</label> <!-- añadir puntuacion a compentario nuevo -->
         <select id="select_score">
-          <option class="opt" selected>1</option>
-          <option class="opt">2</option>
-          <option class="opt">3</option>
-          <option class="opt">4</option>
-          <option class="opt">5</option>
+          <option class="opt" value="1">1</option>
+          <option class="opt" value="2">2</option>
+          <option class="opt" value="3">3</option>
+          <option class="opt" value="4">4</option>
+          <option class="opt" value="5">5</option>
         </select>
        </div>
         <br>
         <button class="btn btn-primary btn-large btn-block" id="btn_reg_add"> Añadir Comentario </button> <!-- boton para psotear-->
+      </div>
+      
+
+      <div id="related-container">
+        <h4 id="related-title">Productos Relacionados</h4>
+        <div id="relatedProd"></div>
       </div>
       
     </div>
