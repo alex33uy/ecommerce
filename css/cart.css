@@ -1,0 +1,56 @@
+
+
+#input_count {
+    width: 60px;
+    align-items: center;
+}
+
+
+.title {
+    height: 50px;
+    margin-top: 20px;
+}
+
+.form-check-label {
+    display: block;
+}
+
+.formsss {
+    margin: 8px 0px;
+}
+
+.form-container {
+    width: inherit;
+}
+
+main {
+    padding: 15px;
+}
+
+.form-group {
+    display: inline-block;
+    margin: 10px;
+}
+
+.form-control {
+    width: 350px;
+    margin: 0;
+}
+
+.num {
+    margin-left: 300px;
+}
+
+.inp2{
+    width: 250px;
+}
+
+.direccion {
+    margin-top: 30px;
+}
+
+.input_count_des {
+    width: 60px;
+}
+
+

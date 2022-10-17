@@ -116,3 +116,12 @@ img {
 .carousel-control-next-icon{
   color: aqua;
 }
+
+#title {
+  display: inline-block;
+}
+
+#buy-btn {
+  float: right;
+  margin-right: 80px;
+}

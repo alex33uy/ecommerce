@@ -10,8 +10,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/login.css">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id" content="243968543201-m994pm132c6f0fhi9afvp1gt0scrdqbe.apps.googleusercontent.com">
+  <meta name="google-signin-client_id" content="159000001934-tqta5bkpl21uug19f84dj6kaobcvuvvl.apps.googleusercontent.com">
   <style>
     body {
       background-color: rgb(248, 249, 250);
@@ -44,7 +43,7 @@
     
             <button class="btn btn-primary btn-large btn-block" id="btn_reg"> Iniciar </button>
 
-            <div class="g-signin2" data-onsucces="onSignIn" data-theme="dark"> </div>
+            <div class="g-signin2" id="my-signin2" data-onsucces="onSignIn" data-theme="dark"> </div>
           </div>
 
           </div>
@@ -67,7 +66,30 @@
     <p>Los datos ingresados no cumplen con los requisitos solicitados</p>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
+  <script>
+  
+function onSuccess(googleUser){
+    console.log(googleUser);
+}
+
+function onFailure(error){
+    console.log(error);
+}
+
+function renderButton(){
+   gapi.signin2.render("my-signing2", {
+    "scope": "profile email",
+    "width": 240,
+    "height":50,
+    "longtitle": true,
+    "onsuccess": onSuccess,
+    "onfailure": onFailure
+   })
+}
+
+</script>
   <script src="js/login.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton"></script>
 </body>
 
 </html>

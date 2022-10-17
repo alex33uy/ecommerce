@@ -29,16 +29,24 @@ button_reg.addEventListener('click', function(){
 
 // funcion Logear con Google
 
-function onSignIn(googleUser) {
-    let profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); 
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
+function onSuccess(googleUser){
+    console.log(googleUser);
+}
 
-    
-    let id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-  }
+function onFailure(error){
+    console.log(error);
+}
+
+function renderButton(){
+   gapi.signin2.render("my-signing2", {
+    "scope": "profile email",
+    "width": 240,
+    "height":50,
+    "longtitle": true,
+    "onsuccess": onSuccess,
+    "onfailure": onFailure
+   })
+}
+  
+
+//   159000001934-tqta5bkpl21uug19f84dj6kaobcvuvvl.apps.googleusercontent.com

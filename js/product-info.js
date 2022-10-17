@@ -1,5 +1,7 @@
 let productId = localStorage.getItem("productID");
 let product_main_container = document.querySelector("#product_main_container");
+let conj_prod_add_cart = [];
+
 
 let URL_COMMENTS =  PRODUCT_INFO_COMMENTS_URL + productId + EXT_TYPE;
 let URL_INFO_PROD_DETAILED = PRODUCT_INFO_URL + productId + EXT_TYPE;
@@ -30,7 +32,8 @@ function showDetailedProduct(prod){
     product_main_container.innerHTML += 
     `
     <br>
-    <h2>${prod.name}</h2>
+    <h2 id="title">${prod.name}</h2>
+    <button class="btn btn-primary btn-large btn-block" id="buy-btn" onclick="addToCart(${prod.id})">Comprar</button>
     <hr>
     <h4><strong>Precio<strong></h4>
     <h4>${prod.currency} ${prod.cost}</h4>
@@ -133,20 +136,6 @@ function setProductId(id){
     window.location= "product-info.html"
 }
 
-//  FUNCION PARA CENTRAR Y AGRANDAR IMAGEN AL CLICKEAR NO CONCLUIDA
-// document.querySelectorAll(".img-prod-container img").forEach(e=>{
-//     e.addEventListener("click", function(ev) {
-//         ev.stopPropagation();
-//         this.parentnode.classList.add("active");
-//     })
-// });
-
-// document.querySelectorAll(".img-prod-container").forEach(e=>{
-//     e.addEventListener("click", function(ev) {
-//         this.classList.remove("active");
-//     })
-// });
-
 
 
 // DESAFIATE: AÑADIR COMENTARIO
@@ -207,3 +196,15 @@ let seconds =  date.getSeconds();
 boton_add_comment.addEventListener("click", function() {
     addComment();
 })
+
+// DESAFIATE AGREGAR PRODUCTO AL CARRITO 
+let button_buy = document.getElementById("btn-buy");
+
+function addToCart(id){
+
+    let conj_prod_add_cart = JSON.parse(localStorage.getItem("productAddToCart")) || [];
+    conj_prod_add_cart.push(id);
+    let arrayProdsInCart = JSON.stringify(conj_prod_add_cart)
+    localStorage.setItem("productAddToCart", arrayProdsInCart);
+    console.log(conj_prod_add_cart)
+};
