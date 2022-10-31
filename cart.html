@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/cart.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -54,48 +55,174 @@
         </div>
       </section>
 
-      <div class="form-container">
-        <h4 class="title"> Tipo de envio </h4>
-        <div class="formsss">
-        <input type="radio" name="option" id="btn-1" class="form-check-inline"></input>
-        <label for="btn-1"> Premium 2 a 5 días (15%) </label>
-        </div>
 
-        <div class="formsss">
-        <input type="radio" name="option" id="btn-2" class="form-check-inline"></input>
-        <label for="btn-2"> Express 5 a 8 días (7%) </label>
-        </div>
+  <div class="form-container">
+    <h4 class="title"> Tipo de envio </h4>
+    <div class="formsss">
+      <input type="radio" name="option" id="btn-1" class="form-check-inline" value="0.15"></input>
+      <label for="btn-1"> Premium 2 a 5 días (15%) </label>
+    </div>
 
-       <div class="formsss">
-        <input type="radio" name="option" id="btn-3" class="form-check-inline"></input>
-        <label for="btn-3"> Standard 8 a 12 días (5%) </label>
-       </div>
-      </div>
+    <div class="formsss">
+      <input type="radio" name="option" id="btn-2" class="form-check-inline" value="0.07" checked></input>
+      <label for="btn-2"> Express 5 a 8 días (7%) </label>
+    </div>
 
+   <div class="formsss">
+      <input type="radio" name="option" id="btn-3" class="form-check-inline" value="0.05"></input>
+      <label for="btn-3"> Standard 8 a 12 días (5%) </label>
+   </div>
+  </div>
+
+
+<form action="#" method="get" class="row mt-4 row g-3 needs-validation"  onsubmit="event.preventDefault()" novalidate>
       <div class="direccion">
         <h4> Direccion de envio </h4>
 
         <div class="form-group">
-        <label for="inp-1">Calle</label>
-        <br>
-        <input id="inp-1" class="form-control">
+          <label for="inp-1">Calle</label>
+          <br>
+          <input id="inp-1" class="form-control" required>
         </div>
         <div class="form-group num">
-        <label for="inp-2">Número</label>
-        <br>
-        <input id="inp-2" class="form-control inp2">
+          <label for="inp-2">Número</label>
+          <br>
+          <input id="inp-2" class="form-control inp2" required>
         </div>
-        <br>
+          <br>
         <div class="form-group">
-        <label for="inp-3">Esquina</label>
-        <br>
-        <input id="inp-3" class="form-control">
+          <label for="inp-3">Esquina</label>
+          <br>
+          <input id="inp-3" class="form-control" required>
         </div>
-
       </div>
+   
+      <div class="costs-container">
+         <h4> Costos </h4>
+         
+         <div class="card mb-0">
+          <div class="card-body">
+            <div class="d-flex flex-start">
+              <div class="w-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="mb-0">
+                    Subtotal
+                  </h5>
+                  <h5 class="mb-0" id="subtotal_2"></h5>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h6 style="color: #aaa;">
+                    Costo unitario del producto por cantidad
+                  </h6>
+                  <div class="d-flex flex-row">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+        <div class="card mb-0">
+         <div class="card-body">
+           <div class="d-flex flex-start">
+             <div class="w-100">
+               <div class="d-flex justify-content-between align-items-center mb-3">
+                 <h5 class="mb-0">
+                   Costo de envío
+                 </h5>
+                 <h5 class="mb-0" id="cost_env"></h5>
+               </div>
+                 <div class="d-flex justify-content-between align-items-center">
+                 <h6 style="color: #aaa;">
+                   Según el tipo de envío
+                 </h6>
+                 <div class="d-flex flex-row">
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+      <div class="card mb-0">
+       <div class="card-body">
+         <div class="d-flex flex-start">
+           <div class="w-100">
+             <div class="d-flex justify-content-between align-items-center mb-3">
+               <h5 class="mb-0">
+                 <strong>Total (USD)</strong>
+               </h5>
+               <h5 class="mb-0" id="total"><strong></strong></h5>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
 
     </div>
-  </main>
+
+    <div class="container">
+      <h4 id="payment">Forma de pago</h4>
+      <p id="set">No ha seleccionado</p><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" id="selectPay">Selecionar</a>      
+      
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Forma de pago</h1>
+              
+             
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-check" id="div_credit_card">
+                <input class="form-check-input" type="radio" name="paymentOpt" id="credit_card_opt" onclick="optionSelected()">
+                <label class="form-check-label" for="credit_card_opt">
+                  Tarjeta de credito
+                </label>
+              </div>
+              <hr>
+              <div class="d-flex">
+              <div class="mb-3 col-6 img">
+                <label for="exampleFormControlInput4" class="form-label">Numero de tarjeta</label>
+                <input  class="form-control" id="card_number" type="number" required>
+              </div>
+              <div class="mb-3 col-3">
+                <label for="exampleFormControlInput3" class="form-label">Codigo de seg.</label>
+                <input class="form-control" id="security_code" type="number" required>
+              </div>
+            </div>
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput2" class="form-label">Vencimiento (MM/AA)</label>
+              <input  class="form-control" id="expiration" type="text" required>
+            </div>
+            <div class="form-check" id="div_bank_opt">
+              <input class="form-check-input" type="radio" name="paymentOpt" id="bank_transfer_opt" onclick="optionSelected()">
+              <label class="form-check-label" for="bank_transfer_opt">
+                Transferencia bancaria
+              </label>
+            </div>
+            <hr>
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label">Numero de cuenta</label>
+              <input  class="form-control" type="number" id="account_number" required>
+            </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit" id="btn_submit">Finalizar compra</button>
+      </div>
+    </div>
+  </form> 
+</main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -106,6 +233,10 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+    <p>¡ Has comprado con éxito !</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -114,9 +245,10 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+  <script src="js/cart.js" defer></script>
 </body>
 
 </html>

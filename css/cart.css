@@ -53,4 +53,24 @@ main {
     width: 60px;
 }
 
+#account_number, #card_number, #expiration, #security_code {
+    width: 200px;
+}
 
+.fa-trash {
+    color: rgb(163, 15, 15);
+    
+}
+
+#delete_from_cart {
+    border: 1px solid rgb(163, 15, 15);
+    border-radius: 10%;
+}
+
+.alert {
+    position: fixed;
+    top: 80px;
+    width: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
