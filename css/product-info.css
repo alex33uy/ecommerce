@@ -125,3 +125,62 @@ img {
   float: right;
   margin-right: 80px;
 }
+
+@media  (max-width: 950px){
+  #carouselExampleSlidesOnly {
+    width: 380px;
+    height: 265px;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: -50px;
+  }
+  
+  #img_div {
+    width: 380px;
+    height: 265px;
+  }
+  
+  #carrousel {
+    width: 380px;
+    height: 265px;
+  }
+  .card {
+    height: 265px;
+    margin: 10px;
+    width: 360px;
+  }
+  .card-img-top {
+    width: 360px;
+    height: 240px;
+  }
+}
+
+@media  (max-width: 480px){
+  .card-img-top {
+    width: 280px;
+    height: 190px;
+  }
+  .card {
+    height: 215px;
+    margin: 7px;
+    width: 280px;
+  }
+  #carouselExampleSlidesOnly {
+    width: 360px;
+    height: 250px;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: -50px;
+  }
+  
+  #img_div {
+    width: 360px;
+    height: 250px;
+  }
+  
+  #carrousel {
+    width: 360px;
+    height: 250px;
+  }
+}
+

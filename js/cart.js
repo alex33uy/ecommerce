@@ -20,29 +20,31 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
   });
   let products_in_Cart = JSON.parse(localStorage.getItem("productAddToCart"));
+
   const Cart_Products = new Set(products_in_Cart);
   let resultCart_Prodcuts = [...Cart_Products];
+
   productsAddedtoCart(resultCart_Prodcuts);
-  choosenOptAndTotal();
-  
+  choosenOptAndTotal()
 });
 
 
 
+
 let costOptions = document.querySelectorAll("input[name='option']");
-  let choosenOptAndTotal = () => {
-    let selected = document.querySelector("input[name='option']:checked").value;
-     // multiplica por subtotal devolviendo por porcentaje
-    console.log(selected)
-    sub2.innerHTML = `USD ${(calculateSubtotal()).toFixed(2)}`
-    let costEnvValue = Number(calculateSubtotal() * selected).toFixed(2);
-    cost_env.innerHTML = `USD ${costEnvValue}`;
-    total = (Number(calculateSubtotal()) + Number(costEnvValue)).toFixed(2)
-    total_final.innerHTML = `USD ${total}`;
-  };
-  costOptions.forEach((costt) => {
-    costt.addEventListener("click", choosenOptAndTotal);
-  });
+const choosenOptAndTotal = () => {
+  let selected = document.querySelector("input[name='option']:checked").value;
+  // multiplica por subtotal devolviendo por porcentaje
+  sub2.innerHTML = `USD ${calculateSubtotal().toFixed(2)}`;
+  let costEnvValue = Number(calculateSubtotal() * selected).toFixed(2);
+  cost_env.innerHTML = `USD ${costEnvValue}`;
+  total = (Number(calculateSubtotal()) + Number(costEnvValue)).toFixed(2);
+  total_final.innerHTML = `USD ${total}`;
+  console.log("se ejecuto")
+};
+costOptions.forEach((costt) => {
+  costt.addEventListener("click", choosenOptAndTotal);
+});
 
 function articleToHtml(id, image, name, currency, unitCost, count) {
   articles_bought.push({
@@ -71,7 +73,7 @@ function articleToHtml(id, image, name, currency, unitCost, count) {
       <div class="col-md-2 d-flex justify-content-center">
         <div>
           <p class="small text-muted mb-4 pb-2">Cantidad</p>
-          <input class="form-control input_count_des" id="input_${id}" type="number" oninput="subtotal(${unitCost}, this.value , ${id}, '${currency}')" value="1" min="1">
+          <input class="form-control input_count_des" id="input_${id}" type="number" oninput="subtotal(${unitCost},  ${id}, '${currency}')"  value="1" min="1">
         </div>
       </div>
       <div class="col-md-2 d-flex justify-content-center">
@@ -89,14 +91,14 @@ function articleToHtml(id, image, name, currency, unitCost, count) {
       <div class="col-md-2 d-flex justify-content-center">
         <div id="subtotal_div">
           <p class="small text-muted mb-4 pb-2">Subtotal</p>
-          <p class="lead fw-normal mb-0 subtotall" id="subtotal_of_${id}" onchange="calculateSubtotal()">${currency} ${unitCost}</p>
+          <p class="lead fw-normal mb-0 subtotall" id="subtotal_of_${id}" >${currency} ${unitCost}</p>
         </div>
       </div>
     </div>
     <div class="col-md-2 d-flex justify-content-center">
         <div>
           <p></p>
-          <button id="delete_from_cart" onclick=""><i class="fas fa-trash"></i></button>
+          <button id="delete_from_cart"  class="delete_from_cart" onclick="removeItemFromCart(${id})"><i class="fas fa-trash"></i></button>
         </div>
     </div>
   
@@ -136,10 +138,19 @@ function productsAddedtoCart(resultCart_Prodcuts) {
 
 ///////// BOTONES CON VALORES Y OPCIONES
 
-function subtotal(cost, units, id, currency) {
+function subtotal(cost, id, currency) {
+  let units = document.getElementById("input_" + id).value;
   let subtotaldiv = document.getElementById("subtotal_of_" + id);
-  subtotaldiv.innerHTML = `${currency} ${cost * units}`;
-}
+  let calc_subtotal = units * cost
+  subtotaldiv.innerHTML = `${currency} ${calc_subtotal}`;
+  let selected = document.querySelector("input[name='option']:checked").value;
+  sub2.innerHTML = `USD ${calculateSubtotal().toFixed(2)}`;
+  let costEnvValue = Number(calculateSubtotal() * selected).toFixed(2);
+  cost_env.innerHTML = `USD ${costEnvValue}`;
+  total = (Number(calculateSubtotal()) + Number(costEnvValue)).toFixed(2);
+  total_final.innerHTML = `USD ${total}`;
+};
+
 
 // Determina valor de opciones elegidas en cuanto a costo.
 
@@ -150,12 +161,12 @@ let cost_env = document.getElementById("cost_env"); // costos de envio multiplic
 let total_final = document.getElementById("total"); // total, suma de costos de envio y subtotal
 let subtotales = document.getElementsByClassName("subtotall");
 
+
 function calculateSubtotal() {
   let cont = 0;
   for (let f = 0; f < subtotales.length; f++) {
-    let subIndiv = Number(subtotales[f].innerHTML.split(" ").splice(1, 1)[0]);
-    let currency = subtotales[f].innerHTML.split(" ").splice(0, 1)[0];
-
+    let subIndiv = Number(subtotales[f].innerHTML.split(" ").splice(1, 1)[0]); // toma numero subtotal del html
+    let currency = subtotales[f].innerHTML.split(" ").splice(0, 1)[0];// saca tipo de cambio de html
     if (currency === "UYU") {
       cont += parseFloat((subIndiv / 40).toFixed(2));
     } else {
@@ -164,7 +175,7 @@ function calculateSubtotal() {
   }
   sumSubtotal = cont;
   return sumSubtotal;
-};
+}
 
 // // CHEQUEAR SI LOS INPUTS ESTAN DEBIDAMENTE COMPLETADOS
 
@@ -235,4 +246,22 @@ function optionSelected() {
     payment.innerHTML = "Tarjeta de credito";
     setCustomMessage.setAttribute("style", "color: red;");
   }
+}
+
+// DESAFIATE ENTREGA 6
+
+// La funcion toma el local storage donde se guardan los añadidos, borra los id repetidos, y borra el elemento que coincida con el parametro id y refresco la pagina con history.
+function removeItemFromCart(id) {
+  let prodsAddToCart = JSON.parse(localStorage.getItem("productAddToCart"));
+  const prodsInCartArr = new Set(prodsAddToCart);
+  let resultProductsInCart = [...prodsInCartArr];
+  let find = resultProductsInCart.indexOf(id);
+  console.log(find);
+  if (find > -1) {
+    console.log(find);
+    resultProductsInCart.splice(find, 1);
+    let arrayProdsInCart = JSON.stringify(resultProductsInCart);
+    localStorage.setItem("productAddToCart", arrayProdsInCart);
+  }
+  history.go(0);
 }
