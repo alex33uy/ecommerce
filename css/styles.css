@@ -203,3 +203,10 @@ a.custom-card:hover {
 .fa-door-closed {
   color: rgb(151, 20, 20);
 }
+
+
+@media  (max-width: 1140px){
+  .jumbotron {
+    display: none;
+  }
+}

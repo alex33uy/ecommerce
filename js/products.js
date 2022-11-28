@@ -71,7 +71,7 @@ function showProductsTitle(titulo) {
 }
 
 // DESAFIATE BUSCADOR
-let search_for = document.getElementById("search_for");
+;
 
 function showProductsList(productsArray) {
   console.log(productsArray);
@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(PRODUCTS_URL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       productsArray = resultObj.data.products;
+      currentProductsArray = productsArray;
       showProductsList(productsArray);
     }
   });
@@ -157,6 +158,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
   btn_sold_count.addEventListener("click", function () {
     sortAndShowProducts(ORDER_BY_SOLD_COUNT, productsArray);
   });
+
+  search_for.addEventListener("input", function () {
+    let dataFiltrado = nameSearch(currentProductsArray);
+    prod_container_product_list.innerHTML = "";
+    showProductsList(dataFiltrado);
+  });
+
 
   document
     .getElementById("clearRangeFilter")
@@ -192,3 +200,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 });
 
+let search_for = document.getElementById("search_for")
+function nameSearch(array) {
+  let search_for = document.getElementById("search_for").value;
+  let result = array;
+  if (search_for) {
+      result = array.filter((product) => product.name.toLowerCase().indexOf(search_for.toLowerCase()) > -1);
+  }
+  return result;
+}
